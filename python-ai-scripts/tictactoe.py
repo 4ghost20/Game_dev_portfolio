@@ -54,14 +54,11 @@ class TicTacToe:
         return self.check_winner() is None and all(self.board[r][c] != " " for r in range(3) for c in range(3))
 
     # ---------- Minimax ----------
-    # We evaluate from AI ('O') perspective:
+    # Scores from AI ('O') perspective:
     #   AI win  -> +1
     #   Draw    ->  0
     #   AI lose -> -1
-    #
-    # Depth is used to slightly prefer faster wins (and delay losses):
-    #   win score becomes  1 * (1 + 0.05*(9 - depth))
-    #   loss score becomes -1 * (1 + 0.05*(9 - depth))
+    # Depth nudge slightly prefers faster wins and delays losses.
     def minimax(self, depth: int, is_maximizing: bool) -> float:
         winner = self.check_winner()
         if winner == "O":
